@@ -8,8 +8,8 @@ import Provider from "@/components/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
-  title: "Breadit",
-  description: "A Reddit clone built with Next.js and TypeScript.",
+  title: "readdit",
+  description: "A Reddit clone.",
 };
 
 export default function RootLayout({
