@@ -66,6 +66,7 @@ export const authOptions: NextAuthOptions = {
       return "/";
     },
   },
+  secret: "atr5-gt65-9jet",
 };
 
 export const getAuthSession = () => getServerSession(authOptions);
