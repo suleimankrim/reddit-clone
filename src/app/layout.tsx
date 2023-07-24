@@ -22,7 +22,7 @@ export default function RootLayout({
       lang="en"
       className={cn("bg-white light text-slate-900 antialiased", inter)}
     >
-      <body className="bg-slate-50 antialiased h-screen w-screen">
+      <body className="bg-slate-50 antialiased min-h-screen w-screen">
         <Provider>
           {/* @ts-expect-error async server component */}
           <Navbar />

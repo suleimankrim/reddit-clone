@@ -47,7 +47,7 @@ const Editor: FC<EditorProps> = ({ subredditId }: EditorProps) => {
       const { data } = await axios.post("/api/subridder/post/create", payload);
       return data;
     },
-    onError: (error) => {
+    onError: () => {
       return toast({
         title: "Something went wrong.",
         description: "Your post was not published. Please try again.",
@@ -55,7 +55,6 @@ const Editor: FC<EditorProps> = ({ subredditId }: EditorProps) => {
       });
     },
     onSuccess: () => {
-      // turn pathname /r/mycommunity/submit into /r/mycommunity
       const newPathname = pathname.split("/").slice(0, -1).join("/");
       router.push(newPathname);
 
@@ -125,7 +124,7 @@ const Editor: FC<EditorProps> = ({ subredditId }: EditorProps) => {
 
   useEffect(() => {
     if (Object.keys(errors).length) {
-      for (const [_key, value] of Object.entries(errors)) {
+      for (const [, value] of Object.entries(errors)) {
         value;
         toast({
           title: "Something went wrong.",

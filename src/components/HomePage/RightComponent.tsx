@@ -8,8 +8,8 @@ interface RightComponentProps {}
 const RightComponent: FC<RightComponentProps> = () => {
   return (
     <>
-      <div className="font-bold text-4xl w-[300px]">Your Feed</div>
-      <div className="border-gray-300 mt-1 border w-[400px] overflow-hidden shadow rounded-2xl ">
+      <div className="font-bold text-4xl max-w-[300px]">Your Feed</div>
+      <div className="border-gray-300 mt-1 border max-w-[400px] overflow-hidden shadow rounded-2xl ">
         <div className="bg-emerald-300 text-sm p-1 ">
           <div className="flex m-7">
             <HomeIcon />

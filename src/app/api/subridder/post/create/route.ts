@@ -1,5 +1,4 @@
 import { getAuthSession } from "@/lib/auth";
-import { subreddirtSubredditIdValidator } from "@/lib/validator/subreddirtValidation";
 import { db } from "@/lib/db";
 import z from "zod";
 import { PostValidator } from "@/lib/validator/PosTvalidator";

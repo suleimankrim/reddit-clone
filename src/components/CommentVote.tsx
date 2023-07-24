@@ -38,14 +38,10 @@ const CommentVote: FC<CommentVoteProps> = ({
       await axios.patch("/api/subridder/post/comment/vote", payload);
     },
     onError: (error, voteType) => {
-      if (voteType === "UP") {
-        setVoteNumber((prevState) => prevState - 1);
-        setDidVotePost(prevVote);
-      }
-      if (voteType === "DOWN") {
-        setVoteNumber((prevState) => prevState + 1);
-        setDidVotePost(prevVote);
-      }
+      if (voteType === "UP") setVoteNumber((prevState) => prevState - 1);
+      else setVoteNumber((prevState) => prevState + 1);
+      setDidVotePost(prevVote);
+
       if (error instanceof AxiosError) {
         if (error.response?.status === 422) {
           return toast({
@@ -60,27 +56,21 @@ const CommentVote: FC<CommentVoteProps> = ({
       }
       return toast({
         title: "there is an error",
-        description: "ops ....",
+        description: "could not vote",
         variant: "destructive",
       });
     },
     onMutate: (type) => {
       if (type === didVotePost?.type) {
         setDidVotePost(undefined);
-        if (type === "UP") {
-          setVoteNumber((prevState) => prevState - (voteNumber ? 1 : 2));
-        }
-        if (type === "DOWN") {
-          setVoteNumber((prevState) => prevState + (voteNumber ? 1 : 2));
-        }
+        if (type === "UP") setVoteNumber((prevState) => prevState - 1);
+        else if (type === "DOWN") setVoteNumber((prevState) => prevState + 1);
       } else {
         setDidVotePost({ type });
-        if (type === "UP") {
-          setVoteNumber((prevState) => prevState + (voteNumber ? 1 : 2));
-        }
-        if (type === "DOWN") {
-          setVoteNumber((prevState) => prevState - (voteNumber ? 1 : 2));
-        }
+        if (type === "UP")
+          setVoteNumber((prevState) => prevState + (voteNumber ? 2 : 1));
+        else if (type === "DOWN")
+          setVoteNumber((prevState) => prevState - (voteNumber ? 2 : 1));
       }
     },
   });

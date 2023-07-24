@@ -29,10 +29,7 @@ const CreateComment: FC<CreateCommentProps> = ({
         text,
         postId,
       };
-      const { data } = await axios.patch(
-        "/api/subridder/post/comment",
-        payload
-      );
+      await axios.patch("/api/subridder/post/comment", payload);
     },
     onSuccess: () => {
       startTransition(() => {
@@ -40,8 +37,8 @@ const CreateComment: FC<CreateCommentProps> = ({
         route.refresh();
       });
       return toast({
-        title: "subscribed",
-        description: `You Are now subscribed to `,
+        title: "Comment Created",
+        description: `the Comment created successfully`,
       });
     },
     onError: (error) => {
@@ -64,7 +61,7 @@ const CreateComment: FC<CreateCommentProps> = ({
     },
   });
   return (
-    <div className="mt-2">
+    <div className="mt-3">
       <Label htmlFor="comment">Your Comment</Label>
       <div>
         <Textarea
@@ -75,9 +72,10 @@ const CreateComment: FC<CreateCommentProps> = ({
           onChange={(e) => setInput(e.target.value)}
         />
       </div>
-      <div>
+      <div className="flex justify-end">
         <Button
           variant={"default"}
+          className="mt-1"
           disabled={input?.length === 0}
           isLoading={isLoading}
           onClick={() => {

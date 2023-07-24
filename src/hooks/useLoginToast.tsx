@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/Button";

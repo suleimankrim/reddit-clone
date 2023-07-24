@@ -5,7 +5,6 @@ import { User, VoteType } from ".prisma/client";
 import CommentVote from "@/components/CommentVote";
 import { Button } from "@/components/ui/Button";
 import { MessageSquare } from "lucide-react";
-import { useSession } from "next-auth/react";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
@@ -40,16 +39,12 @@ const CommentUi: FC<CommentUiProps> = ({
         text,
         postId,
       };
-      const { data } = await axios.patch(
-        "/api/subridder/post/comment",
-        payload
-      );
+      await axios.patch("/api/subridder/post/comment", payload);
     },
     onSuccess: () => {
       router.refresh();
     },
   });
-  const { data: session } = useSession();
   const [input, setInput] = useState<string>();
   const [isReplaying, setIsReplaying] = useState<boolean>(false);
   return (
@@ -99,12 +94,15 @@ const CommentUi: FC<CommentUiProps> = ({
                 onChange={(e) => setInput(e.target.value)}
               />
             </div>
-            <div>
+            <div className="w-full p-1 flex justify-end">
               <Button
                 variant={"default"}
+                className="mt-1 "
                 disabled={input?.length === 0}
                 isLoading={isLoading}
                 onClick={() => {
+                  setInput("");
+                  setIsReplaying(false);
                   if (input) {
                     sendMessage({
                       postId,

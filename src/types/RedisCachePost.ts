@@ -1,4 +1,3 @@
-import z from "zod";
 import { Vote } from ".prisma/client";
 
 export type CacheSchema = {

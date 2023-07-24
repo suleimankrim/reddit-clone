@@ -55,7 +55,7 @@ const PostFeed: FC<PostFeedProps> = ({
   const posts = data?.pages.flatMap((page) => page) ?? initialPost;
   if (!mount) return null;
   return (
-    <div className="flex w-2/3 flex-col">
+    <>
       {posts.map((post, index) => {
         const voteCount =
           post.vote &&
@@ -101,7 +101,7 @@ const PostFeed: FC<PostFeedProps> = ({
           <Loader2 className="w-6 h-6 text-zinc-500 animate-spin" />
         </div>
       )}
-    </div>
+    </>
   );
 };
 export default PostFeed;

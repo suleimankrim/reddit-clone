@@ -36,7 +36,7 @@ const Page = async ({ params }: PageProps) => {
   }
   if (!cachedPost && !post) return notFound();
   return (
-    <div className="w-full h-full flex gap-1 justify-center">
+    <div className="w-full h-full flex gap-1 justify-center min-h-screen bg-zinc-50">
       <Suspense fallback={fallBackVote()}>
         {/* @ts-expect-error async server component */}
         <PostVoteServerSIde
@@ -53,7 +53,7 @@ const Page = async ({ params }: PageProps) => {
           }}
         ></PostVoteServerSIde>
       </Suspense>
-      <div className="bg-white rounded-lg shadow-xl mt-6  p-2 w-[600px]">
+      <div className="bg-white rounded-lg shadow-xl mt-6 p-2 w-full max-w-[600px]">
         <div className="w-full flex mt-2">
           <div className="text-sm inline-block mr-0.5">
             Posted By {post?.author.username ?? cachedPost.username}
@@ -69,12 +69,16 @@ const Page = async ({ params }: PageProps) => {
         </div>
         <hr className="content-center w-full"></hr>
         <Test content={post?.content ?? cachedPost.content}></Test>
-        <Suspense
-          fallback={<Loader2 className="h-5 w-5 animate-spin text-zinc-500" />}
-        >
-          {/* @ts-expect-error Server Component */}
-          <CommentsSection postId={post?.id ?? cachedPost.id} />
-        </Suspense>
+        <div className="mt-10">
+          <Suspense
+            fallback={
+              <Loader2 className="h-5 w-5 animate-spin text-zinc-500" />
+            }
+          >
+            {/* @ts-expect-error Server Component */}
+            <CommentsSection postId={post?.id ?? cachedPost.id} />
+          </Suspense>
+        </div>
       </div>
     </div>
   );
@@ -82,7 +86,7 @@ const Page = async ({ params }: PageProps) => {
 
 function fallBackVote() {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 items-center h-full mt-10">
       <ArrowBigUp />
       <Loader2 className="animate-spin" />
       <ArrowBigDown />

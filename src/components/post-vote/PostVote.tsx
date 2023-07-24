@@ -59,7 +59,7 @@ const PostVote: FC<PostVoteProps> = ({
       }
       return toast({
         title: "there is an error",
-        description: "subreddit could not create",
+        description: "could not vote",
         variant: "destructive",
       });
     },

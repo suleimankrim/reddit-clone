@@ -16,7 +16,7 @@ const MiniCreatePost: FC<MiniCreatePostProps> = ({
   slug,
 }: MiniCreatePostProps) => {
   return (
-    <div className="border-gray-300 border bg-white flex items-center rounded shadow w-[600px]">
+    <div className="border-gray-300 border bg-white flex items-center rounded shadow w-full max-w-[600px]">
       <div className="relative">
         <UserAvatar
           className="relative h-10 w-10 m-2"

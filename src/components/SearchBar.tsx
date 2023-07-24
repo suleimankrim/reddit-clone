@@ -23,7 +23,6 @@ const SearchBar: FC<SearchBarProps> = () => {
   const [input, setInput] = useState<string>("");
   const {
     data: queryResult,
-    isFetching,
     isFetched,
     refetch,
   } = useQuery({
@@ -42,7 +41,7 @@ const SearchBar: FC<SearchBarProps> = () => {
   }, 300);
   const debounceRequst = useCallback(() => {
     request();
-  }, []);
+  }, [request]);
   const commandRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(commandRef, () => {
     setInput("");
@@ -53,42 +52,44 @@ const SearchBar: FC<SearchBarProps> = () => {
   }, [pathName]);
 
   return (
-    <Command
-      ref={commandRef}
-      className="relative rounded-lg border max-w-lg z-50 overflow-visible"
-    >
-      <CommandInput
-        value={input}
-        className="outline-none border-none focus:border-none focus:outline-none ring-0"
-        onValueChange={(text) => {
-          setInput(text);
-          debounceRequst();
-        }}
-        placeholder="Find Community"
-      ></CommandInput>
-      {input?.length > 0 && (
-        <CommandList className="absolute bg-white top-full inset-x-0 shadow rounded-b-md">
-          {isFetched && <CommandEmpty>no results found</CommandEmpty>}
-          {(queryResult?.length ?? 0) > 0 ? (
-            <CommandGroup heading={"community"}>
-              {queryResult?.map((value) => (
-                <CommandItem
-                  key={value.id}
-                  value={value.name}
-                  onSelect={(e) => {
-                    router.push(`/r/${e}`);
-                    router.refresh();
-                  }}
-                >
-                  <Users className="mr-2 h-4 w-4" />
-                  <a href={`/r/${value.name}`}>{`/r/${value.name}`}</a>
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          ) : null}
-        </CommandList>
-      )}
-    </Command>
+    <div className="max-w-sm md:max-w-md z-50 lg:max-w-2xl w-full p-2">
+      <Command
+        ref={commandRef}
+        className="relative shadow rounded-lg border z-[100] overflow-visible"
+      >
+        <CommandInput
+          value={input}
+          className="outline-none border-none focus:border-none focus:outline-none ring-0"
+          onValueChange={(text) => {
+            setInput(text);
+            debounceRequst();
+          }}
+          placeholder="Find Community"
+        ></CommandInput>
+        {input?.length > 0 && (
+          <CommandList className="absolute bg-white top-full z-50 inset-x-0 shadow rounded-b-md">
+            {isFetched && <CommandEmpty>no results found</CommandEmpty>}
+            {(queryResult?.length ?? 0) > 0 ? (
+              <CommandGroup heading={"community"}>
+                {queryResult?.map((value) => (
+                  <CommandItem
+                    key={value.id}
+                    value={value.name}
+                    onSelect={(e) => {
+                      router.push(`/r/${e}`);
+                      router.refresh();
+                    }}
+                  >
+                    <Users className="mr-2 h-4 w-4" />
+                    <a href={`/r/${value.name}`}>{`/r/${value.name}`}</a>
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            ) : null}
+          </CommandList>
+        )}
+      </Command>
+    </div>
   );
 };
 export default SearchBar;

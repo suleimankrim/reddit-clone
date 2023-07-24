@@ -57,7 +57,6 @@ export async function PATCH(req: Request) {
         if (current.type === "DOWN") return acc - 1;
         return acc;
       }, 0);
-      console.log(voteAmount);
       if (voteAmount > CACHE_AFTER_UPDATE) {
         const payload: CacheSchema = {
           id: post.id,
@@ -67,7 +66,6 @@ export async function PATCH(req: Request) {
           title: post.title,
           username: post.author.username ?? "",
         };
-        console.log("gggggggggg");
         await redis.hset(`post:${post.id}`, payload);
       }
       return new Response("ok");
@@ -84,7 +82,6 @@ export async function PATCH(req: Request) {
         if (current.type === "DOWN") return acc - 1;
         return acc;
       }, 0);
-      console.log(voteAmount);
       if (voteAmount > CACHE_AFTER_UPDATE) {
         const payload: CacheSchema = {
           id: post.id,
@@ -94,7 +91,6 @@ export async function PATCH(req: Request) {
           title: post.title,
           username: post.author.username ?? "",
         };
-        console.log("gggggggggg");
         await redis.hset(`post:${post.id}`, payload);
       }
       return new Response("ok");

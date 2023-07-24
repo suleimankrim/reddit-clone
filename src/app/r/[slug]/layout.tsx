@@ -54,12 +54,12 @@ const Layout = async ({
   });
   return (
     <div
-      className="w-full h-full grid grid-cols-4"
+      className="w-full h-full grid grid-cols-4 bg-zinc-50 min-h-screen"
       suppressHydrationWarning={true}
     >
-      <div className="col-span-3">{children}</div>
+      <div className="col-span-3 h-full">{children}</div>
 
-      <div className="col-span-1 border border-gray-300 h-fit rounded-lg shadow overflow-hidden bg-white mt-[70px]">
+      <div className="hidden md:block col-span-1 border border-gray-300 h-fit rounded-lg shadow overflow-hidden bg-white mt-[70px]">
         <div className=" py-3 w-full text-center bg-gray-200">
           About r/{subreddit.name}
         </div>

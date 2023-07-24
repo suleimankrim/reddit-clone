@@ -1,4 +1,4 @@
-import z, { infer } from "zod";
+import z from "zod";
 
 export const subreddirtNameValidator = z.object({
   name: z.string().max(22).min(3),

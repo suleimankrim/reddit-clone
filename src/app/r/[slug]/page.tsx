@@ -36,10 +36,7 @@ const CommunityLandPage = async ({ params }: PageProps) => {
   });
   if (!subridder) return notFound();
   return (
-    <div
-      className="flex items-center flex-col pt-8"
-      suppressHydrationWarning={true}
-    >
+    <div className="flex items-center flex-col pt-8">
       <div className="text-2xl font-bold mb-2">{subridder.name}</div>
       <MiniCreatePost session={session} slug={slug}></MiniCreatePost>
       <PostFeed
